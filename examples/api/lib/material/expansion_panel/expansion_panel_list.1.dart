@@ -32,8 +32,7 @@ class ExpansionPanelIconVisibilityExample extends StatefulWidget {
 
 class _ExpansionPanelIconVisibilityExampleState
     extends State<ExpansionPanelIconVisibilityExample> {
-  ExpansionPanelIconVisibility _visibility =
-      ExpansionPanelIconVisibility.visible;
+  ExpansionPanelIconVisibility _visibility = .visible;
   bool _canTapOnHeader = false;
   final List<bool> _isExpanded = <bool>[false, false, false];
 
@@ -50,15 +49,15 @@ class _ExpansionPanelIconVisibilityExampleState
                 SegmentedButton<ExpansionPanelIconVisibility>(
                   segments: const <ButtonSegment<ExpansionPanelIconVisibility>>[
                     ButtonSegment<ExpansionPanelIconVisibility>(
-                      value: ExpansionPanelIconVisibility.visible,
+                      value: .visible,
                       label: Text('Visible'),
                     ),
                     ButtonSegment<ExpansionPanelIconVisibility>(
-                      value: ExpansionPanelIconVisibility.hidden,
+                      value: .hidden,
                       label: Text('Hidden'),
                     ),
                     ButtonSegment<ExpansionPanelIconVisibility>(
-                      value: ExpansionPanelIconVisibility.gone,
+                      value: .gone,
                       label: Text('Gone'),
                     ),
                   ],

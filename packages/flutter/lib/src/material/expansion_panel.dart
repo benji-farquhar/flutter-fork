@@ -105,7 +105,7 @@ class ExpansionPanel {
     this.backgroundColor,
     this.splashColor,
     this.highlightColor,
-    this.trailingIconVisibility = ExpansionPanelIconVisibility.visible,
+    this.trailingIconVisibility = .visible,
   });
 
   /// The widget builder that builds the expansion panels' header.
@@ -433,11 +433,8 @@ class _ExpansionPanelListState extends State<ExpansionPanelList> {
       final ExpansionPanel child = widget.children[index];
       final Widget headerWidget = child.headerBuilder(context, _isChildExpanded(index));
 
-      final iconVisible =
-          child.trailingIconVisibility == ExpansionPanelIconVisibility.visible ||
-          _isChildExpanded(index);
-      final iconMaintainSize =
-          child.trailingIconVisibility == ExpansionPanelIconVisibility.hidden;
+      final iconVisible = child.trailingIconVisibility == .visible || _isChildExpanded(index);
+      final iconMaintainSize = child.trailingIconVisibility == .hidden;
 
       Widget expandIconPadded = Visibility(
         visible: iconVisible,

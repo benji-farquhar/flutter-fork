@@ -2097,7 +2097,7 @@ void main() {
           child: ExpansionPanelList(
             children: <ExpansionPanel>[
               ExpansionPanel(
-                trailingIconVisibility: ExpansionPanelIconVisibility.hidden,
+                trailingIconVisibility: .hidden,
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return const ListTile(title: Text('Panel'));
                 },
@@ -2131,7 +2131,7 @@ void main() {
           child: ExpansionPanelList(
             children: <ExpansionPanel>[
               ExpansionPanel(
-                trailingIconVisibility: ExpansionPanelIconVisibility.gone,
+                trailingIconVisibility: .gone,
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return const ListTile(title: Text('Panel'));
                 },
@@ -2197,7 +2197,7 @@ void main() {
             children: <ExpansionPanel>[
               ExpansionPanel(
                 canTapOnHeader: true,
-                trailingIconVisibility: ExpansionPanelIconVisibility.hidden,
+                trailingIconVisibility: .hidden,
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return const ListTile(title: Text('Panel'));
                 },
@@ -2227,7 +2227,7 @@ void main() {
             expansionCallback: (int index, bool isExpanded) {},
             children: <ExpansionPanel>[
               ExpansionPanel(
-                trailingIconVisibility: ExpansionPanelIconVisibility.hidden,
+                trailingIconVisibility: .hidden,
                 isExpanded: isExpanded,
                 headerBuilder: (BuildContext context, bool isExpanded) {
                   return const ListTile(title: Text('Panel'));
