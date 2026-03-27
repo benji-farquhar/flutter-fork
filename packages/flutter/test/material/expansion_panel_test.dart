@@ -1938,14 +1938,9 @@ void main() {
     await tester.pumpWidget(buildWidgetForTest(materialGapSize: 0));
     await tester.pumpAndSettle();
     final MergeableMaterial mergeableMaterial = tester.widget(find.byType(MergeableMaterial));
-    expect(mergeableMaterial.children.length, 3);
-    expect(mergeableMaterial.children.whereType<MaterialGap>().length, 1);
+    expect(mergeableMaterial.children.length, 2);
+    expect(mergeableMaterial.children.whereType<MaterialGap>().length, 0);
     expect(mergeableMaterial.children.whereType<MaterialSlice>().length, 2);
-    for (final MergeableMaterialItem e in mergeableMaterial.children) {
-      if (e is MaterialGap) {
-        expect(e.size, 0);
-      }
-    }
 
     await tester.pumpWidget(buildWidgetForTest(materialGapSize: 20));
     await tester.pumpAndSettle();
@@ -1975,7 +1970,6 @@ void main() {
   Future<void> pumpExpansionPanelListAndVerifyGaps(
     WidgetTester tester, {
     required double materialGapSize,
-    required double elevation,
     required int expectedGapCount,
   }) async {
     await tester.pumpWidget(
@@ -1983,7 +1977,6 @@ void main() {
         home: SingleChildScrollView(
           child: ExpansionPanelList(
             materialGapSize: materialGapSize,
-            elevation: elevation,
             children: <ExpansionPanel>[
               ExpansionPanel(
                 isExpanded: true,
@@ -2013,23 +2006,16 @@ void main() {
   }
 
   testWidgets(
-    'ExpansionPanelList does not insert MaterialGap when materialGapSize and elevation are both 0',
+    'ExpansionPanelList does not insert MaterialGap when materialGapSize is 0',
     (WidgetTester tester) async {
-      await pumpExpansionPanelListAndVerifyGaps(tester, materialGapSize: 0, elevation: 0, expectedGapCount: 0);
+      await pumpExpansionPanelListAndVerifyGaps(tester, materialGapSize: 0, expectedGapCount: 0);
     },
   );
 
   testWidgets(
-    'ExpansionPanelList still inserts MaterialGap when materialGapSize is 0 but elevation > 0',
+    'ExpansionPanelList inserts MaterialGap when materialGapSize is greater than 0',
     (WidgetTester tester) async {
-      await pumpExpansionPanelListAndVerifyGaps(tester, materialGapSize: 0, elevation: 2, expectedGapCount: 1);
-    },
-  );
-
-  testWidgets(
-    'ExpansionPanelList still inserts MaterialGap when elevation is 0 but materialGapSize > 0',
-    (WidgetTester tester) async {
-      await pumpExpansionPanelListAndVerifyGaps(tester, materialGapSize: 16, elevation: 0, expectedGapCount: 1);
+      await pumpExpansionPanelListAndVerifyGaps(tester, materialGapSize: 16, expectedGapCount: 1);
     },
   );
 

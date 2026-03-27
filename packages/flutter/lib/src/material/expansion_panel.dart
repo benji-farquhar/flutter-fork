@@ -271,6 +271,8 @@ class ExpansionPanelList extends StatefulWidget {
 
   /// Defines elevation for the [ExpansionPanel] while it's expanded.
   ///
+  /// Has no effect when [materialGapSize] is 0.
+  ///
   /// By default, the value of elevation is 2.
   final double elevation;
 
@@ -279,6 +281,16 @@ class ExpansionPanelList extends StatefulWidget {
 
   /// Defines the [MaterialGap.size] of the [MaterialGap] which is placed
   /// between the [ExpansionPanelList.children] when they're expanded.
+  ///
+  /// When set to zero, no [MaterialGap] is inserted between expanded panels
+  /// and dividers are preserved, allowing a flat, divider-separated appearance.
+  ///
+  /// {@tool dartpad}
+  /// Here is an example of a flat [ExpansionPanelList] with [materialGapSize]
+  /// set to zero, where dividers separate the panels.
+  ///
+  /// ** See code in examples/api/lib/material/expansion_panel/expansion_panel_list.1.dart **
+  /// {@end-tool}
   ///
   /// Defaults to `16.0`.
   final double materialGapSize;
@@ -380,13 +392,10 @@ class _ExpansionPanelListState extends State<ExpansionPanelList> {
     );
 
     final items = <MergeableMaterialItem>[];
-    final hasVisibleGap = widget.materialGapSize > 0 || widget.elevation > 0;
+    final bool hasVisibleGap = widget.materialGapSize > 0;
 
     for (var index = 0; index < widget.children.length; index += 1) {
-      if (_isChildExpanded(index) &&
-          index != 0 &&
-          !_isChildExpanded(index - 1) &&
-          hasVisibleGap) {
+      if (_isChildExpanded(index) && index != 0 && !_isChildExpanded(index - 1) && hasVisibleGap) {
         items.add(
           MaterialGap(
             key: _SaltedKey<BuildContext, int>(context, index * 2 - 1),
@@ -475,9 +484,7 @@ class _ExpansionPanelListState extends State<ExpansionPanelList> {
         ),
       );
 
-      if (_isChildExpanded(index) &&
-          index != widget.children.length - 1 &&
-          hasVisibleGap) {
+      if (_isChildExpanded(index) && index != widget.children.length - 1 && hasVisibleGap) {
         items.add(
           MaterialGap(
             key: _SaltedKey<BuildContext, int>(context, index * 2 + 1),
